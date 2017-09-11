@@ -3,8 +3,11 @@
 - Investigate why a simple shuffle OOMs when total data exceeds total worker ram
 
 # Experimental setup
+- Latest stable dask+distributed versions ([requirements.txt](https://github.com/jdanbrown/dask-oom/blob/master/requirements.txt)):
+  - `dask==0.15.2`
+  - `distributed==1.18.3`
 - Use local docker containers to make a reproducible and portable distributed environment
-- Worker setup (defined in docker-compose.yml):
+- Worker setup ([docker-compose.yml](https://github.com/jdanbrown/dask-oom/blob/master/docker-compose.yml)):
   - 4 workers @ 1g mem + no swap (4g total worker ram)
   - Default `--memory-limit` (each worker reports 0.584g)
   - Limited to 1 concurrent task per worker, to minimize mem contention and oom risk
@@ -15,8 +18,7 @@
 
 # Results
 
-### oom_ddf.py
-- https://github.com/jdanbrown/dask-oom/blob/master/oom_ddf.py
+### [oom_ddf.py](https://github.com/jdanbrown/dask-oom/blob/master/oom_ddf.py)
 
 | params | ddf_bytes | part_bytes | runtime | success/OOM?
 |---|---|---|---|---
@@ -25,8 +27,7 @@
 | `cols=10 part_rows=157500 nparts=256` | 3g   | 12m | ~00:20 | OOM
 | `cols=10 part_rows=157500 nparts=512` | 6g   | 12m | ~00:30 | OOM
 
-### oom_array.py
-- https://github.com/jdanbrown/dask-oom/blob/master/oom_array.py
+### [oom_array.py](https://github.com/jdanbrown/dask-oom/blob/master/oom_array.py)
 
 | params | da_bytes | chunk_bytes | chunk_n | chunk_shape | runtime | success/OOM?
 |---|---|---|---|---|---|---
@@ -36,8 +37,7 @@
 | `sqrt_n=120` | 1.5g | 13m  | 120 | (14400, 120) | ~00:15 | usually&nbsp;OOM, rare&nbsp;success
 | `sqrt_n=128` | 2g   | 16m  | 128 | (16384, 128) | ~00:10 | OOM
 
-### oom_bag.py
-- https://github.com/jdanbrown/dask-oom/blob/master/oom_bag.py
+### [oom_bag.py](https://github.com/jdanbrown/dask-oom/blob/master/oom_bag.py)
 - Much slower than ddf and array, since bag operations are bottlenecked by more python execution
 
 | params | bag_bytes | part_bytes | runtime | success/OOM?
