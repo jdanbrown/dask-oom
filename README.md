@@ -5,9 +5,8 @@
 # Experimental setup
 - Use local docker containers to make a reproducible and portable distributed environment
 - Worker setup (defined in docker-compose.yml):
-  - 4 workers
-  - 1g mem + no swap
-  - Default `--memory-limit` (workers reported 0.584g)
+  - 4 workers @ 1g mem + no swap (4g total worker ram)
+  - Default `--memory-limit` (each worker reports 0.584g)
   - Limited to 1 concurrent task per worker, to minimize mem contention and oom risk
 - For each of ddf, dask array, and dask bag:
   - Run a simple shuffle operation and test whether the operation succeeds or OOMs
