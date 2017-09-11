@@ -17,6 +17,7 @@
 # Results
 
 ### oom_ddf.py
+- https://github.com/jdanbrown/dask-oom/blob/master/oom_ddf.py
 
 | params | ddf_bytes | part_bytes | runtime | success/OOM?
 |---|---|---|---|---
@@ -26,6 +27,7 @@
 | `cols=10 part_rows=157500 nparts=512` | 6g   | 12m | ~00:30 | OOM
 
 ### oom_array.py
+- https://github.com/jdanbrown/dask-oom/blob/master/oom_array.py
 
 | params | da_bytes | chunk_bytes | chunk_n | chunk_shape | runtime | success/OOM?
 |---|---|---|---|---|---|---
@@ -36,6 +38,8 @@
 | `sqrt_n=128` | 2g   | 16m  | 128 | (16384, 128) | ~00:10 | OOM
 
 ### oom_bag.py
+- https://github.com/jdanbrown/dask-oom/blob/master/oom_bag.py
+- Much slower than ddf and array, since bag operations are bottlenecked by more python execution
 
 | params | bag_bytes | part_bytes | runtime | success/OOM?
 |---|---|---|---|---
