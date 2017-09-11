@@ -1,0 +1,7 @@
+# Latest stable dask releases
+dask==0.15.2
+distributed==1.18.3
+
+# Other deps
+humanize==0.5.1
+ipython==5.0.0

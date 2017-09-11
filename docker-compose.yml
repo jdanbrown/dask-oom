@@ -1,0 +1,20 @@
+scheduler:
+  command: bash -c 'dask-scheduler'
+  image: dask-oom-local
+  mem_limit: 512m
+  mem_swappiness: 0
+  expose:
+  - 8786
+  ports:
+  - 8786:8786
+  - 8787:8787
+
+worker:
+  # Limit each worker to 1 concurrent task, to minimize mem contention and oom risk
+  command: bash -c 'DASK_COMPRESSION=lz4 dask-worker --nprocs 1 --nthreads 1 scheduler:8786'
+  image: dask-oom-local
+  mem_limit: 1g
+  mem_swappiness: 0
+  restart: always
+  links:
+  - scheduler

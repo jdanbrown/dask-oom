@@ -1,0 +1,7 @@
+bokeh=0.12.7
+lz4=0.10.0
+numpy=1.13.1
+pandas=0.20.3
+python=3.6.1
+scipy=0.19.1
+tornado=4.5.2
